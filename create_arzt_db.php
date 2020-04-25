@@ -15,19 +15,19 @@ if(isset($_POST['Submit'])) {
     $Vorname = $_POST['Vorname'];
     $Nachname = $_POST['Nachname'];
     $Fachrichtung = $_POST['Fachrichtung'];
-    echo $Vorname;
-    echo $Nachname;
-    echo $Fachrichtung;
+    #echo $Vorname;
+    #echo $Nachname;
+    #echo $Fachrichtung;
   }
 
-$sql =  "INSERT INTO Arzt (Vorname, Nachname, Fachrichtung)
-VALUES ('$Vorname', '$Nachname', '$Fachrichtung')";
+$stmt = $conn->prepare("INSERT INTO Arzt (Vorname, Nachname, Fachrichtung) VALUES (?, ?, ?)");
 
-if ($conn->query($sql) === TRUE) {
-  echo "Create Arzt successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$stmt->bind_param("sss", $Vorname, $Nachname, $Fachrichtung);
+
+$stmt->execute();
+
+$stmt->close();
+
 
 $conn->close();
 

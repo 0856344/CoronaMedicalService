@@ -17,35 +17,25 @@ if(isset($_POST['Submit'])) {
     $Vorname = $_POST['Vorname'];
     $Nachname = $_POST['Nachname'];
     $Fachrichtung = $_POST['Fachrichtung'];
-    echo $Vorname;
-    echo $ArztID;
+    #echo $Vorname;
+    #echo $ArztID;
   }
 
-$sql = "UPDATE Arzt SET Vorname='$Vorname' WHERE ArztID='$ArztID'";
 
-if ($conn->query($sql) === TRUE) {
-  echo "Update Vorname successfully ";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$SQL = $conn->prepare("UPDATE Arzt SET Vorname='$Vorname' WHERE ArztID=?");
+$SQL->bind_param('i', $ArztID);
+$SQL->execute();
 
-$sql = "UPDATE Arzt SET Nachname='$Nachname' WHERE ArztID='$ArztID'";
+$SQL = $conn->prepare("UPDATE Arzt SET Nachname='$Nachname' WHERE ArztID=?");
+$SQL->bind_param('i', $ArztID);
+$SQL->execute();
 
-if ($conn->query($sql) === TRUE) {
-  echo "Update Nachname successfully ";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$sql = "UPDATE Arzt SET Fachrichtung='$Fachrichtung' WHERE ArztID='$ArztID'";
-
-if ($conn->query($sql) === TRUE) {
-  echo "Update Fachrichtung successfully ";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$SQL = $conn->prepare("UPDATE Arzt SET Fachrichtung='$Fachrichtung' WHERE ArztID=?");
+$SQL->bind_param('i', $ArztID);
+$SQL->execute();
 
 $conn->close();
+
 
 echo '<meta http-equiv="refresh" content="1; URL=Aerztepersonal.php" />';
 ?> 

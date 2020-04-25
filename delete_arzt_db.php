@@ -11,19 +11,13 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+$ArztID = $_GET['ArztID'];
+#echo $ArztID;
   
-    $ArztID = $_GET['ArztID'];
-    echo $ArztID;
-  
+$SQL = $conn->prepare("DELETE FROM Arzt WHERE ArztID=?");
+$SQL->bind_param('i', $ArztID);
 
-$sql = "DELETE FROM Arzt WHERE ArztID='$ArztID'";
-
-
-if ($conn->query($sql) === TRUE) {
-  echo "Delete Arzt successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$SQL->execute();
 
 $conn->close();
 
