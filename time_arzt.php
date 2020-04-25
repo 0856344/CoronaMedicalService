@@ -193,16 +193,18 @@ $result = $conn->query($sql);
         </td>
       </tr>
       <tr>
-        <td>Beginn - Format:(yyyy-mm-dd hh:mm:ss)</td>
-        <td>
-          <input type="text" name="von" size="50px" value="2020-04-17 06:00:00">
+        <td>Beginn</td>
+        <td>          
+          <input type="date" name="vonDate" required>
+          <input type="time" name="vonTime" required>
         </td>
 
       </tr>
       <tr>
-       <td>Ende - Format:(yyyy-mm-dd hh:mm:ss)</td>
+       <td>Ende</td>
        <td>
-        <input type="text" name="bis" size="50px" value="2020-04-18 06:00:00">
+          <input type="date" name="bisDate" required>
+          <input type="time" name="bisTime" required>
       </td>
     </tr>
   </tr>

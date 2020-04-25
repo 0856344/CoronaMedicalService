@@ -14,16 +14,21 @@ if ($conn->connect_error) {
 if(isset($_POST['Submit'])) {    
     $Station = $_POST['Station'];
     $ArztID = $_POST['ArztID'];
-    $von = $_POST['von'];
-    $bis = $_POST['bis'];
 
+    $vonDate = $_POST['vonDate'];
+    $vonTime = $_POST['vonTime'];
+   
+    $sql =  "SELECT ADDTIME(CONVERT('$vonDate', DATETIME), '$vonTime')";
+    $result = $conn->query($sql);
+    $row = $result->fetch_row();
+    $von = $row[0];
 
-    #$d=mktime(11, 14, 00, 8, 12, 2014);
-    #echo "Created date is " . date("Y-m-d H:i:s", $d);
-    #$vonDate = new DateTime($von);
-   # $vonDate->format("Y-m-d H:i:s");
-    #echo $vonDate->format("Y-m-d H:i:s");
-    #echo $d->format("Y-m-d H:i:s");
+    $bisDate = $_POST['bisDate'];
+    $bisTime = $_POST['bisTime'];
+    $sql =  "SELECT ADDTIME(CONVERT('$bisDate', DATETIME), '$bisTime')";
+    $result = $conn->query($sql);
+    $row = $result->fetch_row();
+    $bis = $row[0];
   }
 
 
